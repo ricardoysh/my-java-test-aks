@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: vm-ricardoysh
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -33,15 +33,15 @@ jobs:
       run: |
         mvn clean install
         
-    - name: Upload JaCoCo Report
-      uses: actions/upload-artifact@v4
-      with:
-        name: jacoco-report
-        path: target/site/jacoco/jacoco.xml
+    # - name: Upload JaCoCo Report
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: jacoco-report
+    #     path: target/site/jacoco/jacoco.xml
     
   build-and-push-image:
     needs: build-and-test
-    runs-on: ubuntu-latest
+    runs-on: vm-ricardoysh
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
