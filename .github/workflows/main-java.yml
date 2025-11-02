@@ -14,6 +14,7 @@ on:
 permissions:
   id-token: write
   contents: read
+  actions: read
 
 jobs:
   build-and-test:
@@ -93,7 +94,7 @@ jobs:
           --username ${{ secrets.AZURE_CLIENT_ID }} \
           --password ${{ secrets.AZURE_CLIENT_SECRET }} \
           --tenant ${{secrets.AZURE_TENANT_ID }}
-          
+
     # - name: Azure Login
     #   uses: azure/login@v2
     #   with:
@@ -110,7 +111,7 @@ jobs:
     - name: Deploy to AKS
       uses: azure/k8s-deploy@v5
       with:
-        manifest: |
+        manifests: |
           aks/deployment.yml
         images: |
           ${{ env.AZURE_ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
