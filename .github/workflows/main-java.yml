@@ -75,7 +75,7 @@ jobs:
     - name: Build & Push Docker image to ACR
       run: |
         echo "-------> Realizando o build da imagem..."
-        docker buildx build --platform linux/amd64 -t ${{ env.AZURE_ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} --push
+        docker buildx build --platform linux/amd64 -t ${{ env.AZURE_ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} --push .
 
         # echo "################# Realizando o push da imagem #####################"
 
