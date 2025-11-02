@@ -77,8 +77,8 @@ jobs:
         echo "-------> Realizando o build da imagem..."
         docker build . -t ${{ env.AZURE_ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
-        echo "##################################################################"
-        echo "------> Realizando o push da imagem..."
+        echo "################# Realizando o push da imagem #####################"
+
         docker push ${{ env.AZURE_ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
   deploy-to-aks:
