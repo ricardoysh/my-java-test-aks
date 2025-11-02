@@ -17,7 +17,7 @@ spec:
       containers:
       - name: java-hello-world
         # A imagem será substituída pela pipeline do GitHub Actions
-        image: <ACR_LOGIN_SERVER>/java-hello-world:latest
+        image: ricardoysh.azurecr.io/java-hello-world:latest
         ports:
         - containerPort: 8080 # Porta de exemplo, mesmo que a app seja console
         resources:
