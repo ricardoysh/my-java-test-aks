@@ -1,4 +1,12 @@
-name: Java CI/CD
+name: Java CI/CD to AKS
+
+env:
+  AZURE_RESOURCE_GROUP: 'rg-test-aks-central-us'
+  AZURE_AKS_CLUSTER: 'my-free-aks'
+  AZURE_ACR_NAME: 'ricardoysh'
+  IMAGE_NAME: 'java-hello-world'
+  IMAGE_TAG: ${{ github.sha }}
+
 
 on:
  push
@@ -27,5 +35,26 @@ jobs:
         name: jacoco-report
         path: target/site/jacoco/jacoco.xml
     
-        
-  
+  build-and-push-image:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Azure Login
+      uses: azure/login@v2
+      with:
+        #creds: ${{ secrets.AZURE_CREDENTIALS }}
+        # Alternativa mais segura: use OIDC (OpenID Connect)
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    - name: Connect to Azure Container Registry (ACR)
+      uses: azure/docker-login@v2
+      with:
+        login-server: ${{ env.AZURE_ACR_NAME }}.azurecr.io
+        username: ${{ secrets.AZURE_CLIENT_ID }}
+        password: ${{ secrets.AZURE_CLIENT_SECRET }}
+
