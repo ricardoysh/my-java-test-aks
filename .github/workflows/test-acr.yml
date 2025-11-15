@@ -1,0 +1,40 @@
+name: AZURE TEST ACR
+
+env:
+  AZURE_RESOURCE_GROUP: 'rg-test-aks-central-us'
+  AZURE_AKS_CLUSTER: 'my-free-aks'
+  AZURE_ACR_NAME: 'ricardoysh'
+  IMAGE_NAME: 'java-hello-world'
+  IMAGE_TAG: ${{ github.sha }}
+
+
+on:
+ [push, workflow_dispatch]
+
+permissions:
+  id-token: write
+  contents: read
+  actions: read
+
+jobs:
+  test-acr:
+    runs-on: ubuntu-latest
+    steps:
+    # - name: Checkout code
+    #   uses: actions/checkout@v4
+    - name: Az Login & test Acr
+      run: |
+        az login \
+          --service-principal \
+          --username ${{ secrets.AZURE_CLIENT_ID }} \
+          --password ${{ secrets.AZURE_CLIENT_SECRET }} \
+          --tenant ${{secrets.AZURE_TENANT_ID }}
+
+        echo "---------- Health Check: --------------"
+        az acr check-health --name ${{ env.AZURE_ACR_NAME }}
+        echo ""
+        echo ""
+        echo "---------- Az ACR Login --------------"
+        az acr login --name ${{ env.AZURE_ACR_NAME }}
+        echo " -------------- Finish ---------------"
+        
