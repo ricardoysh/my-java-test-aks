@@ -22,6 +22,21 @@ jobs:
     steps:
     # - name: Checkout code
     #   uses: actions/checkout@v4
+    - name: Install pre-reqs
+      run: |
+        echo "Baixando o binário do Notary..."
+        curl -Lo notary-v0.6.0-linux-amd64.tar.gz https://github.com/theupdateframework/notary/releases/download/v0.6.0/notary-v0.6.0-linux-amd64.tar.gz
+        echo "Extraindo o executável..."
+        tar -xvf notary-v0.6.0-linux-amd64.tar.gz
+        echo "Movendo o executável para o PATH"
+        sudo mv notary /usr/local/bin/
+        echo "Dando permissões corretas para execução..."
+        sudo chmod +x /usr/local/bin/notary
+        echo "Verificando a instalação..."
+        notary -v
+        echo " "
+        echo "Finalizado."
+        
     - name: Az Login & test Acr
       run: |
         az login \
