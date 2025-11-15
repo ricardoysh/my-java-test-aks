@@ -31,14 +31,14 @@ jobs:
           --tenant ${{ secrets.AZURE_TENANT_ID }}
 
         echo "------------ ACR NAME:-----------------"
-        echo ${{ var.AZURE_ACR_NAME }}
+        echo ${{ vars.AZURE_ACR_NAME }}
         echo "---------------------------------------"
         echo ""
         echo "---------- Health Check: --------------"
-        az acr check-health --name ${{ var.AZURE_ACR_NAME }}
+        az acr check-health --name ${{ vars.AZURE_ACR_NAME }}
         echo ""
         echo ""
         echo "---------- Az ACR Login --------------"
-        az acr login --name ${{ var.AZURE_ACR_NAME }}
+        az acr login --name ${{ vars.AZURE_ACR_NAME }}
         echo " -------------- Finish ---------------"
         
