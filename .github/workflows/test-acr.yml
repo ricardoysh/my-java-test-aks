@@ -35,7 +35,14 @@ jobs:
         echo "---------------------------------------"
         echo " "
         echo "-------------- ACR LIST ---------------"
-        az acr list --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --output tsv
+        az acr list -g ${{ env.AZURE_RESOURCE_GROUP }} >> acr.json
+        echo " "
+        echo "------ Subscription & RG ----------------"
+        jq -r '.[].id' acr.json
+        echo "---------------------------------------"
+        echo "----------- ACR CreatedBy -------------!
+        jq -r '.[].systemData' acr.json
+        echo "---------------------------------------"
         # echo "---------- Health Check: --------------"
         # az acr check-health --name ${{ env.AZURE_ACR_NAME }}
         echo " "
