@@ -49,5 +49,5 @@ jobs:
         echo " -------------- Finish ---------------"
         echo " "
         echo "---------- Health Check: --------------"
-        az acr check-health --name ${{ env.AZURE_ACR_NAME }}
+        az acr check-health --name ${{ env.AZURE_ACR_NAME }} --yes
         
