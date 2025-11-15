@@ -28,13 +28,17 @@ jobs:
           --service-principal \
           --username ${{ secrets.AZURE_CLIENT_ID }} \
           --password ${{ secrets.AZURE_CLIENT_SECRET }} \
-          --tenant ${{secrets.AZURE_TENANT_ID }}
+          --tenant ${{ secrets.AZURE_TENANT_ID }}
 
+        echo "------------ ACR NAME:-----------------"
+        echo ${{ var.AZURE_ACR_NAME }}
+        echo "---------------------------------------"
+        echo ""
         echo "---------- Health Check: --------------"
-        az acr check-health --name ${{ env.AZURE_ACR_NAME }}
+        az acr check-health --name ${{ var.AZURE_ACR_NAME }}
         echo ""
         echo ""
         echo "---------- Az ACR Login --------------"
-        az acr login --name ${{ env.AZURE_ACR_NAME }}
+        az acr login --name ${{ var.AZURE_ACR_NAME }}
         echo " -------------- Finish ---------------"
         
