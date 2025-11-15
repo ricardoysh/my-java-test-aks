@@ -35,7 +35,7 @@ jobs:
         echo "---------------------------------------"
         echo " "
         echo "-------------- ACR LIST ---------------"
-        az acr list --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --output table
+        az acr list --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --output tsv
         # echo "---------- Health Check: --------------"
         # az acr check-health --name ${{ env.AZURE_ACR_NAME }}
         echo " "
