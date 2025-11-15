@@ -33,12 +33,12 @@ jobs:
         echo "------------ ACR NAME:-----------------"
         echo ${{ env.AZURE_ACR_NAME }}
         echo "---------------------------------------"
-        echo ""
+        echo " "
         echo "---------- Health Check: --------------"
         az acr check-health --name ${{ env.AZURE_ACR_NAME }}
-        echo ""
-        echo ""
+        echo " "
+        echo " "
         echo "---------- Az ACR Login --------------"
-        az acr login --name ${{ env.AZURE_ACR_NAME }}
+        az acr login --name "${{ env.AZURE_ACR_NAME }}" --verbose
         echo " -------------- Finish ---------------"
         
