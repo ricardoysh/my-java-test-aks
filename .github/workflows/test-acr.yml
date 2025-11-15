@@ -34,8 +34,10 @@ jobs:
         echo ${{ env.AZURE_ACR_NAME }}
         echo "---------------------------------------"
         echo " "
-        echo "---------- Health Check: --------------"
-        az acr check-health --name ${{ env.AZURE_ACR_NAME }}
+        echo "--------------------------------------------------------------"
+        az acr list --resource-group ${{ env.AZURE_RESOURCE_GROUP }}
+        # echo "---------- Health Check: --------------"
+        # az acr check-health --name ${{ env.AZURE_ACR_NAME }}
         echo " "
         echo " "
         echo "---------- Az ACR Login --------------"
